@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState, useEffect, useRef } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import { useState, useEffect, useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Mail,
   Phone,
@@ -28,66 +28,69 @@ import {
   ChevronRight,
   Moon,
   Sun,
-} from "lucide-react"
+} from "lucide-react";
 
 export default function Portfolio() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState("home")
-  const [currentProject, setCurrentProject] = useState(0)
-  const [isDarkMode, setIsDarkMode] = useState(false)
-  const carouselRef = useRef<HTMLDivElement>(null)
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const [currentProject, setCurrentProject] = useState(0);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "about", "experience", "projects", "contact"]
-      const scrollPosition = window.scrollY + 100
+      const sections = ["home", "about", "experience", "projects", "contact"];
+      const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
-        const element = document.getElementById(section)
+        const element = document.getElementById(section);
         if (element) {
-          const offsetTop = element.offsetTop
-          const offsetHeight = element.offsetHeight
+          const offsetTop = element.offsetTop;
+          const offsetHeight = element.offsetHeight;
 
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section)
-            break
+          if (
+            scrollPosition >= offsetTop &&
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            setActiveSection(section);
+            break;
           }
         }
       }
-    }
+    };
 
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Auto-scroll carousel
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentProject((prev) => (prev + 1) % projects.length)
-    }, 5000)
+      setCurrentProject((prev) => (prev + 1) % projects.length);
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
+    const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      element.scrollIntoView({ behavior: "smooth" });
     }
-    setIsMenuOpen(false)
-  }
+    setIsMenuOpen(false);
+  };
 
   const nextProject = () => {
-    setCurrentProject((prev) => (prev + 1) % projects.length)
-  }
+    setCurrentProject((prev) => (prev + 1) % projects.length);
+  };
 
   const prevProject = () => {
-    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length)
-  }
+    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length);
+  };
 
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode)
-  }
+    setIsDarkMode(!isDarkMode);
+  };
 
   const skills = [
     { name: "Python", level: 95 },
@@ -96,64 +99,55 @@ export default function Portfolio() {
     { name: "Node.js/NestJS", level: 85 },
     { name: "AWS/Cloud", level: 82 },
     { name: "Docker/Kubernetes", level: 78 },
-  ]
+  ];
 
   const projects = [
     {
       title: "Data Center Management System",
       description:
         "Full-stack system for monitoring and managing rented data center assets including servers, GPUs, network cables, and power racks with real-time inventory tracking.",
-      tech: ["Python", "Flask", "PostgreSQL", "JavaScript", "Docker"],
-      image: "/placeholder.svg?height=240&width=400",
+      tech: [
+        "Node.js",
+        "TypeScript",
+        "Prisma",
+        "PostgreSQL",
+        "Vue.js",
+        "Quasar FrameWork",
+        "Docker",
+      ],
+      image: "/datacenter.png?height=240&width=400",
       github: "https://github.com/danlewismuriuki",
       live: "https://intuitive-planner.vercel.app/",
-    },
-    {
-      title: "Supply Chain Backend System",
-      description:
-        "Scalable backend architecture for Witz Africa's supply chain platform, bridging suppliers and vendors with mobile-first ordering system.",
-      tech: ["Python", "FastAPI", "PostgreSQL", "Redis", "AWS"],
-      image: "/placeholder.svg?height=240&width=400",
-      github: "https://github.com/danlewismuriuki",
-      live: "#",
     },
     {
       title: "Open Data Agriculture Platform",
       description:
         "Backend solutions supporting open data initiatives in agriculture and nutrition for GODAN, facilitating global stakeholder collaboration.",
-      tech: ["Python", "Node.js", "MongoDB", "REST APIs", "Azure"],
-      image: "/placeholder.svg?height=240&width=400",
+      tech: ["Node.js", "NestJs", "PostgreSQL", "Prisma", "REST APIs", "Azure"],
+      image: "/godan3.png?height=240&width=400",
       github: "https://github.com/danlewismuriuki",
-      live: "#",
+      live: "https://www.godan.info/datahub",
     },
     {
-      title: "E-Commerce Microservices",
+      title: "Vitabu Vitabu",
       description:
-        "Distributed microservices architecture for high-traffic e-commerce platform with real-time inventory management and payment processing.",
-      tech: ["Node.js", "Express", "MongoDB", "Redis", "Docker", "Kubernetes"],
-      image: "/placeholder.svg?height=240&width=400",
+        "Platform connecting Kenyan parents to exchange, buy, or donate school books. Save money while building stronger communities through book sharing, smart matching, and safe transactions.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "M-Pesa API"],
+      // image: "/vitabuvitabu.png?height=240&width=400",
+      image: "/vitabuvitabu.png",
       github: "https://github.com/danlewismuriuki",
-      live: "#",
+      live: "https://vitabuvitabu.app/",
     },
     {
-      title: "Real-Time Analytics Dashboard",
+      title: "BizMasterPro",
       description:
-        "High-performance analytics platform processing millions of events per day with real-time visualization and alerting capabilities.",
-      tech: ["Python", "Apache Kafka", "ClickHouse", "React", "WebSocket"],
-      image: "/placeholder.svg?height=240&width=400",
+        "An AI-powered business management ecosystem that transforms operations with quantum analytics, AI scheduling, financial automation, and enterprise-grade security — boosting productivity, cutting costs, and driving growth.",
+      tech: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "AI/ML"],
+      image: "/bizpro.png?height=240&width=400",
       github: "https://github.com/danlewismuriuki",
-      live: "#",
+      live: "https://bizmaster.co.ke",
     },
-    {
-      title: "AI-Powered Content Management",
-      description:
-        "Intelligent content management system with AI-driven categorization, automated tagging, and smart content recommendations.",
-      tech: ["Python", "TensorFlow", "FastAPI", "PostgreSQL", "Elasticsearch"],
-      image: "/placeholder.svg?height=240&width=400",
-      github: "https://github.com/danlewismuriuki",
-      live: "#",
-    },
-  ]
+  ];
 
   const experiences = [
     {
@@ -212,21 +206,27 @@ export default function Portfolio() {
         "Enhanced codebase quality through documentation and CI pipeline improvements",
       ],
     },
-  ]
+  ];
 
   const certifications = [
     "AWS Certified Cloud Practitioner",
     "IBM Data Science Certificate",
     "Google Data Analytics Certificate",
     "ALX Software Engineering Program",
-  ]
+  ];
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? "dark bg-gray-900" : "bg-white"}`}>
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        isDarkMode ? "dark bg-gray-900" : "bg-white"
+      }`}
+    >
       {/* Apple-style Sticky Header */}
       <header
         className={`sticky top-0 z-50 backdrop-blur-xl border-b transition-colors duration-300 ${
-          isDarkMode ? "bg-gray-900/80 border-gray-800" : "bg-white/80 border-gray-100"
+          isDarkMode
+            ? "bg-gray-900/80 border-gray-800"
+            : "bg-white/80 border-gray-100"
         }`}
       >
         <div className="max-w-7xl mx-auto px-6">
@@ -255,8 +255,8 @@ export default function Portfolio() {
                     activeSection === item.id
                       ? "text-white"
                       : isDarkMode
-                        ? "text-gray-300 hover:text-white"
-                        : "text-gray-600 hover:text-white"
+                      ? "text-gray-300 hover:text-white"
+                      : "text-gray-600 hover:text-white"
                   }`}
                   style={{
                     backgroundImage:
@@ -293,7 +293,9 @@ export default function Portfolio() {
               {/* Mobile Menu Button */}
               <button
                 className={`md:hidden transition-colors ${
-                  isDarkMode ? "text-gray-300 hover:text-white" : "text-gray-600 hover:text-gray-900"
+                  isDarkMode
+                    ? "text-gray-300 hover:text-white"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
@@ -306,7 +308,9 @@ export default function Portfolio() {
           {isMenuOpen && (
             <nav
               className={`md:hidden py-4 border-t backdrop-blur-xl transition-colors duration-300 ${
-                isDarkMode ? "border-gray-800 bg-gray-900/95" : "border-gray-100 bg-white/95"
+                isDarkMode
+                  ? "border-gray-800 bg-gray-900/95"
+                  : "border-gray-100 bg-white/95"
               }`}
             >
               {[
@@ -330,7 +334,11 @@ export default function Portfolio() {
                         "radial-gradient(circle farthest-corner at 10% 20%, rgba(0,97,255,1) 0%, rgba(96,239,255,1) 100.7%)",
                     }}
                   ></span>
-                  <span className={`relative z-10 ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
+                  <span
+                    className={`relative z-10 ${
+                      isDarkMode ? "text-gray-300" : "text-gray-600"
+                    }`}
+                  >
                     {item.label}
                   </span>
                 </button>
@@ -344,34 +352,52 @@ export default function Portfolio() {
       <section
         id="home"
         className={`min-h-screen flex items-center relative overflow-hidden transition-colors duration-300 ${
-          isDarkMode ? "bg-gradient-to-b from-gray-800 to-gray-900" : "bg-gradient-to-b from-gray-50 to-white"
+          isDarkMode
+            ? "bg-gradient-to-b from-gray-800 to-gray-900"
+            : "bg-gradient-to-b from-gray-50 to-white"
         }`}
       >
         {/* Background Icons */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <Code
-            className={`absolute top-20 left-10 w-8 h-8 rotate-12 ${isDarkMode ? "text-white/5" : "text-black/5"}`}
+            className={`absolute top-20 left-10 w-8 h-8 rotate-12 ${
+              isDarkMode ? "text-white/5" : "text-black/5"
+            }`}
           />
           <Database
-            className={`absolute top-32 right-20 w-12 h-12 -rotate-12 ${isDarkMode ? "text-white/5" : "text-black/5"}`}
+            className={`absolute top-32 right-20 w-12 h-12 -rotate-12 ${
+              isDarkMode ? "text-white/5" : "text-black/5"
+            }`}
           />
           <Server
-            className={`absolute bottom-40 left-20 w-10 h-10 rotate-45 ${isDarkMode ? "text-white/5" : "text-black/5"}`}
+            className={`absolute bottom-40 left-20 w-10 h-10 rotate-45 ${
+              isDarkMode ? "text-white/5" : "text-black/5"
+            }`}
           />
           <Cloud
-            className={`absolute top-60 left-1/4 w-14 h-14 -rotate-6 ${isDarkMode ? "text-white/5" : "text-black/5"}`}
+            className={`absolute top-60 left-1/4 w-14 h-14 -rotate-6 ${
+              isDarkMode ? "text-white/5" : "text-black/5"
+            }`}
           />
           <Terminal
-            className={`absolute top-1/3 left-1/2 w-9 h-9 rotate-12 ${isDarkMode ? "text-white/5" : "text-black/5"}`}
+            className={`absolute top-1/3 left-1/2 w-9 h-9 rotate-12 ${
+              isDarkMode ? "text-white/5" : "text-black/5"
+            }`}
           />
           <Cpu
-            className={`absolute top-40 right-1/3 w-11 h-11 -rotate-45 ${isDarkMode ? "text-white/5" : "text-black/5"}`}
+            className={`absolute top-40 right-1/3 w-11 h-11 -rotate-45 ${
+              isDarkMode ? "text-white/5" : "text-black/5"
+            }`}
           />
           <HardDrive
-            className={`absolute bottom-20 left-1/3 w-8 h-8 rotate-30 ${isDarkMode ? "text-white/5" : "text-black/5"}`}
+            className={`absolute bottom-20 left-1/3 w-8 h-8 rotate-30 ${
+              isDarkMode ? "text-white/5" : "text-black/5"
+            }`}
           />
           <Wifi
-            className={`absolute top-80 right-1/4 w-10 h-10 -rotate-12 ${isDarkMode ? "text-white/5" : "text-black/5"}`}
+            className={`absolute top-80 right-1/4 w-10 h-10 -rotate-12 ${
+              isDarkMode ? "text-white/5" : "text-black/5"
+            }`}
           />
         </div>
 
@@ -386,7 +412,9 @@ export default function Portfolio() {
                 Software
                 <span
                   className={`block bg-gradient-to-r bg-clip-text text-transparent ${
-                    isDarkMode ? "from-white to-gray-300" : "from-gray-900 to-gray-600"
+                    isDarkMode
+                      ? "from-white to-gray-300"
+                      : "from-gray-900 to-gray-600"
                   }`}
                 >
                   Engineer
@@ -397,8 +425,9 @@ export default function Portfolio() {
                   isDarkMode ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                Hi, I'm Dan. I design and deliver scalable, high-performance systems that drive innovation and solve
-                complex technical challenges.
+                Hi, I'm Dan. I design and deliver scalable, high-performance
+                systems that drive innovation and solve complex technical
+                challenges.
               </p>
               <div
                 className={`flex items-center justify-center space-x-2 transition-colors duration-300 ${
@@ -414,7 +443,9 @@ export default function Portfolio() {
               <Button
                 size="lg"
                 className={`px-8 py-4 rounded-full text-base font-medium shadow-lg hover:shadow-xl transition-all duration-300 ${
-                  isDarkMode ? "bg-white hover:bg-gray-100 text-gray-900" : "bg-gray-900 hover:bg-gray-800 text-white"
+                  isDarkMode
+                    ? "bg-white hover:bg-gray-100 text-gray-900"
+                    : "bg-gray-900 hover:bg-gray-800 text-white"
                 }`}
                 onClick={() => scrollToSection("projects")}
               >
@@ -482,7 +513,9 @@ export default function Portfolio() {
         {/* Background Icons - Adjusted positioning and opacity */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <Database
-            className={`absolute top-10 right-32 w-16 h-16 rotate-12 ${isDarkMode ? "text-white/2" : "text-black/2"}`}
+            className={`absolute top-10 right-32 w-16 h-16 rotate-12 ${
+              isDarkMode ? "text-white/2" : "text-black/2"
+            }`}
           />
           <Server
             className={`absolute bottom-32 left-32 w-12 h-12 -rotate-12 ${
@@ -490,7 +523,9 @@ export default function Portfolio() {
             }`}
           />
           <Cloud
-            className={`absolute top-1/2 right-10 w-10 h-10 rotate-45 ${isDarkMode ? "text-white/2" : "text-black/2"}`}
+            className={`absolute top-1/2 right-10 w-10 h-10 rotate-45 ${
+              isDarkMode ? "text-white/2" : "text-black/2"
+            }`}
           />
           <Terminal
             className={`absolute bottom-10 right-1/3 w-14 h-14 -rotate-6 ${
@@ -498,7 +533,9 @@ export default function Portfolio() {
             }`}
           />
           <Code
-            className={`absolute top-20 left-10 w-8 h-8 rotate-30 ${isDarkMode ? "text-white/2" : "text-black/2"}`}
+            className={`absolute top-20 left-10 w-8 h-8 rotate-30 ${
+              isDarkMode ? "text-white/2" : "text-black/2"
+            }`}
           />
         </div>
 
@@ -516,8 +553,9 @@ export default function Portfolio() {
                 isDarkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Results-driven Software Engineer with proven expertise in Python, JavaScript, and PostgreSQL, passionate
-              about solving complex technical challenges.
+              Results-driven Software Engineer with proven expertise in Python,
+              JavaScript, and PostgreSQL, passionate about solving complex
+              technical challenges.
             </p>
           </div>
 
@@ -536,14 +574,18 @@ export default function Portfolio() {
                 }`}
               >
                 <p>
-                  Started my journey as a Python developer at Gebeya, where I discovered my passion for building
-                  scalable backend systems. Over 4+ years, I've evolved into a founding engineer who architects
-                  solutions that drive business growth and innovation.
+                  Started my journey as a Python developer at Gebeya, where I
+                  discovered my passion for building scalable backend systems.
+                  Over 4+ years, I've evolved into a founding engineer who
+                  architects solutions that drive business growth and
+                  innovation.
                 </p>
                 <p>
-                  Currently leading backend development at Witz Africa, where I'm building supply chain solutions that
-                  bridge the gap between suppliers and vendors across Africa. I believe in clean code practices, system
-                  reliability, and mentoring teams to achieve excellence.
+                  Currently leading backend development at Witz Africa, where
+                  I'm building supply chain solutions that bridge the gap
+                  between suppliers and vendors across Africa. I believe in
+                  clean code practices, system reliability, and mentoring teams
+                  to achieve excellence.
                 </p>
               </div>
             </div>
@@ -583,7 +625,9 @@ export default function Portfolio() {
           {/* Technical Skills Section */}
           <div
             className={`rounded-3xl p-8 shadow-sm mb-16 border transition-colors duration-300 ${
-              isDarkMode ? "bg-gray-700 border-gray-600" : "bg-white border-gray-100"
+              isDarkMode
+                ? "bg-gray-700 border-gray-600"
+                : "bg-white border-gray-100"
             }`}
           >
             <div className="text-center mb-8">
@@ -599,7 +643,8 @@ export default function Portfolio() {
                   isDarkMode ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                Expertise across the full technology stack with focus on backend development and system architecture
+                Expertise across the full technology stack with focus on backend
+                development and system architecture
               </p>
             </div>
 
@@ -613,7 +658,12 @@ export default function Portfolio() {
                       isDarkMode ? "text-white" : "text-gray-900"
                     }`}
                   >
-                    <Server size={18} className={`mr-2 ${isDarkMode ? "text-gray-400" : "text-gray-600"}`} />
+                    <Server
+                      size={18}
+                      className={`mr-2 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    />
                     Backend Development
                   </h4>
                   <div className="space-y-3">
@@ -623,7 +673,10 @@ export default function Portfolio() {
                       { name: "FastAPI", level: 90 },
                       { name: "Flask", level: 85 },
                     ].map((skill, index) => (
-                      <div key={index} className="flex items-center justify-between">
+                      <div
+                        key={index}
+                        className="flex items-center justify-between"
+                      >
                         <span
                           className={`text-sm font-medium transition-colors duration-300 ${
                             isDarkMode ? "text-gray-200" : "text-gray-700"
@@ -632,7 +685,11 @@ export default function Portfolio() {
                           {skill.name}
                         </span>
                         <div className="flex items-center space-x-2">
-                          <div className={`w-16 rounded-full h-1.5 ${isDarkMode ? "bg-gray-600" : "bg-gray-200"}`}>
+                          <div
+                            className={`w-16 rounded-full h-1.5 ${
+                              isDarkMode ? "bg-gray-600" : "bg-gray-200"
+                            }`}
+                          >
                             <div
                               className={`h-1.5 rounded-full transition-all duration-1000 ${
                                 isDarkMode ? "bg-gray-300" : "bg-gray-600"
@@ -660,7 +717,12 @@ export default function Portfolio() {
                       isDarkMode ? "text-white" : "text-gray-900"
                     }`}
                   >
-                    <Code size={18} className={`mr-2 ${isDarkMode ? "text-gray-400" : "text-gray-600"}`} />
+                    <Code
+                      size={18}
+                      className={`mr-2 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    />
                     Frontend Development
                   </h4>
                   <div className="space-y-3">
@@ -670,7 +732,10 @@ export default function Portfolio() {
                       { name: "Next.js", level: 82 },
                       { name: "JavaScript", level: 90 },
                     ].map((skill, index) => (
-                      <div key={index} className="flex items-center justify-between">
+                      <div
+                        key={index}
+                        className="flex items-center justify-between"
+                      >
                         <span
                           className={`text-sm font-medium transition-colors duration-300 ${
                             isDarkMode ? "text-gray-200" : "text-gray-700"
@@ -679,7 +744,11 @@ export default function Portfolio() {
                           {skill.name}
                         </span>
                         <div className="flex items-center space-x-2">
-                          <div className={`w-16 rounded-full h-1.5 ${isDarkMode ? "bg-gray-600" : "bg-gray-200"}`}>
+                          <div
+                            className={`w-16 rounded-full h-1.5 ${
+                              isDarkMode ? "bg-gray-600" : "bg-gray-200"
+                            }`}
+                          >
                             <div
                               className={`h-1.5 rounded-full transition-all duration-1000 ${
                                 isDarkMode ? "bg-gray-300" : "bg-gray-600"
@@ -707,7 +776,12 @@ export default function Portfolio() {
                       isDarkMode ? "text-white" : "text-gray-900"
                     }`}
                   >
-                    <Database size={18} className={`mr-2 ${isDarkMode ? "text-gray-400" : "text-gray-600"}`} />
+                    <Database
+                      size={18}
+                      className={`mr-2 ${
+                        isDarkMode ? "text-gray-400" : "text-gray-600"
+                      }`}
+                    />
                     Data & Infrastructure
                   </h4>
                   <div className="space-y-3">
@@ -717,7 +791,10 @@ export default function Portfolio() {
                       { name: "AWS", level: 82 },
                       { name: "Docker", level: 78 },
                     ].map((skill, index) => (
-                      <div key={index} className="flex items-center justify-between">
+                      <div
+                        key={index}
+                        className="flex items-center justify-between"
+                      >
                         <span
                           className={`text-sm font-medium transition-colors duration-300 ${
                             isDarkMode ? "text-gray-200" : "text-gray-700"
@@ -726,7 +803,11 @@ export default function Portfolio() {
                           {skill.name}
                         </span>
                         <div className="flex items-center space-x-2">
-                          <div className={`w-16 rounded-full h-1.5 ${isDarkMode ? "bg-gray-600" : "bg-gray-200"}`}>
+                          <div
+                            className={`w-16 rounded-full h-1.5 ${
+                              isDarkMode ? "bg-gray-600" : "bg-gray-200"
+                            }`}
+                          >
                             <div
                               className={`h-1.5 rounded-full transition-all duration-1000 ${
                                 isDarkMode ? "bg-gray-300" : "bg-gray-600"
@@ -814,7 +895,9 @@ export default function Portfolio() {
                   }`}
                 >
                   <div
-                    className={`w-3 h-3 rounded-full flex-shrink-0 ${isDarkMode ? "bg-gray-400" : "bg-gray-400"}`}
+                    className={`w-3 h-3 rounded-full flex-shrink-0 ${
+                      isDarkMode ? "bg-gray-400" : "bg-gray-400"
+                    }`}
                   ></div>
                   <span
                     className={`font-medium transition-colors duration-300 ${
@@ -838,7 +921,11 @@ export default function Portfolio() {
               >
                 Bachelor of Informatics and Computer Science
               </h4>
-              <p className={`transition-colors duration-300 ${isDarkMode ? "text-gray-300" : "text-gray-600"}`}>
+              <p
+                className={`transition-colors duration-300 ${
+                  isDarkMode ? "text-gray-300" : "text-gray-600"
+                }`}
+              >
                 Strathmore University, Nairobi, Kenya • 2021
               </p>
             </div>
@@ -849,7 +936,9 @@ export default function Portfolio() {
       {/* Apple-style Experience Section */}
       <section
         id="experience"
-        className={`py-24 transition-colors duration-300 ${isDarkMode ? "bg-gray-900" : "bg-white"}`}
+        className={`py-24 transition-colors duration-300 ${
+          isDarkMode ? "bg-gray-900" : "bg-white"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
@@ -904,7 +993,9 @@ export default function Portfolio() {
                   <div className="mt-4 md:mt-0">
                     <span
                       className={`inline-flex items-center px-4 py-2 rounded-full text-sm font-medium shadow-sm transition-colors duration-300 ${
-                        isDarkMode ? "bg-gray-700 text-gray-300" : "bg-white text-gray-600"
+                        isDarkMode
+                          ? "bg-gray-700 text-gray-300"
+                          : "bg-white text-gray-600"
                       }`}
                     >
                       <Calendar size={14} className="mr-2" />
@@ -964,7 +1055,9 @@ export default function Portfolio() {
         {/* Background Icons */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <Cpu
-            className={`absolute top-20 left-20 w-12 h-12 rotate-12 ${isDarkMode ? "text-white/2" : "text-black/2"}`}
+            className={`absolute top-20 left-20 w-12 h-12 rotate-12 ${
+              isDarkMode ? "text-white/2" : "text-black/2"
+            }`}
           />
           <HardDrive
             className={`absolute bottom-30 right-10 w-10 h-10 -rotate-12 ${
@@ -972,10 +1065,14 @@ export default function Portfolio() {
             }`}
           />
           <Wifi
-            className={`absolute top-60 right-1/3 w-14 h-14 rotate-45 ${isDarkMode ? "text-white/2" : "text-black/2"}`}
+            className={`absolute top-60 right-1/3 w-14 h-14 rotate-45 ${
+              isDarkMode ? "text-white/2" : "text-black/2"
+            }`}
           />
           <Server
-            className={`absolute bottom-10 left-1/3 w-8 h-8 -rotate-30 ${isDarkMode ? "text-white/2" : "text-black/2"}`}
+            className={`absolute bottom-10 left-1/3 w-8 h-8 -rotate-30 ${
+              isDarkMode ? "text-white/2" : "text-black/2"
+            }`}
           />
         </div>
 
@@ -1042,7 +1139,9 @@ export default function Portfolio() {
                               <span
                                 key={i}
                                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300 ${
-                                  isDarkMode ? "bg-gray-600 text-gray-200" : "bg-gray-100 text-gray-700"
+                                  isDarkMode
+                                    ? "bg-gray-600 text-gray-200"
+                                    : "bg-gray-100 text-gray-700"
                                 }`}
                               >
                                 {tech}
@@ -1058,7 +1157,9 @@ export default function Portfolio() {
                                   ? "border-gray-600 text-gray-300 hover:bg-gray-600"
                                   : "border-gray-300 text-gray-700 hover:bg-gray-50"
                               }`}
-                              onClick={() => window.open(project.github, "_blank")}
+                              onClick={() =>
+                                window.open(project.github, "_blank")
+                              }
                             >
                               <Github size={16} className="mr-2" />
                               Code
@@ -1069,7 +1170,9 @@ export default function Portfolio() {
                                   ? "bg-white hover:bg-gray-100 text-gray-900"
                                   : "bg-gray-900 hover:bg-gray-800 text-white"
                               }`}
-                              onClick={() => window.open(project.live, "_blank")}
+                              onClick={() =>
+                                window.open(project.live, "_blank")
+                              }
                             >
                               <ExternalLink size={16} className="mr-2" />
                               Demo
@@ -1117,8 +1220,8 @@ export default function Portfolio() {
                         ? "bg-white w-8"
                         : "bg-gray-900 w-8"
                       : isDarkMode
-                        ? "bg-gray-600 hover:bg-gray-500"
-                        : "bg-gray-300 hover:bg-gray-400"
+                      ? "bg-gray-600 hover:bg-gray-500"
+                      : "bg-gray-300 hover:bg-gray-400"
                   }`}
                 />
               ))}
@@ -1130,7 +1233,9 @@ export default function Portfolio() {
       {/* Apple-style Contact Section */}
       <section
         id="contact"
-        className={`py-24 transition-colors duration-300 ${isDarkMode ? "bg-gray-900" : "bg-white"}`}
+        className={`py-24 transition-colors duration-300 ${
+          isDarkMode ? "bg-gray-900" : "bg-white"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
@@ -1146,7 +1251,8 @@ export default function Portfolio() {
                 isDarkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Ready to build something amazing together? {"Let's"} discuss your next software project.
+              Ready to build something amazing together? {"Let's"} discuss your
+              next software project.
             </p>
           </div>
 
@@ -1158,19 +1264,25 @@ export default function Portfolio() {
                     icon: Mail,
                     label: "Email",
                     value: "danlewismuriuki2@gmail.com",
-                    color: isDarkMode ? "bg-blue-900 text-blue-300" : "bg-blue-50 text-blue-600",
+                    color: isDarkMode
+                      ? "bg-blue-900 text-blue-300"
+                      : "bg-blue-50 text-blue-600",
                   },
                   {
                     icon: Phone,
                     label: "Phone",
                     value: "+254746106100",
-                    color: isDarkMode ? "bg-green-900 text-green-300" : "bg-green-50 text-green-600",
+                    color: isDarkMode
+                      ? "bg-green-900 text-green-300"
+                      : "bg-green-50 text-green-600",
                   },
                   {
                     icon: MapPin,
                     label: "Location",
                     value: "Nairobi, Kenya",
-                    color: isDarkMode ? "bg-orange-900 text-orange-300" : "bg-orange-50 text-orange-600",
+                    color: isDarkMode
+                      ? "bg-orange-900 text-orange-300"
+                      : "bg-orange-50 text-orange-600",
                   },
                 ].map((contact, index) => (
                   <div key={index} className="flex items-center space-x-4">
@@ -1202,16 +1314,25 @@ export default function Portfolio() {
               <div className="flex space-x-4 pt-8">
                 <Button
                   className={`rounded-full px-6 transition-colors duration-300 ${
-                    isDarkMode ? "bg-white hover:bg-gray-100 text-gray-900" : "bg-gray-900 hover:bg-gray-800 text-white"
+                    isDarkMode
+                      ? "bg-white hover:bg-gray-100 text-gray-900"
+                      : "bg-gray-900 hover:bg-gray-800 text-white"
                   }`}
-                  onClick={() => window.open("https://github.com/danlewismuriuki", "_blank")}
+                  onClick={() =>
+                    window.open("https://github.com/danlewismuriuki", "_blank")
+                  }
                 >
                   <Github size={18} className="mr-2" />
                   GitHub
                 </Button>
                 <Button
                   className="bg-blue-600 hover:bg-blue-700 rounded-full px-6 text-white"
-                  onClick={() => window.open("https://linkedin.com/in/danlewismuriuki", "_blank")}
+                  onClick={() =>
+                    window.open(
+                      "https://linkedin.com/in/danlewismuriuki",
+                      "_blank"
+                    )
+                  }
                 >
                   <Linkedin size={18} className="mr-2" />
                   LinkedIn
@@ -1220,7 +1341,9 @@ export default function Portfolio() {
             </div>
 
             <div
-              className={`rounded-3xl p-8 transition-colors duration-300 ${isDarkMode ? "bg-gray-800" : "bg-gray-50"}`}
+              className={`rounded-3xl p-8 transition-colors duration-300 ${
+                isDarkMode ? "bg-gray-800" : "bg-gray-50"
+              }`}
             >
               <form className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
@@ -1314,7 +1437,9 @@ export default function Portfolio() {
                 </div>
                 <Button
                   className={`w-full py-4 rounded-xl font-medium transition-colors duration-300 ${
-                    isDarkMode ? "bg-white hover:bg-gray-100 text-gray-900" : "bg-gray-900 hover:bg-gray-800 text-white"
+                    isDarkMode
+                      ? "bg-white hover:bg-gray-100 text-gray-900"
+                      : "bg-gray-900 hover:bg-gray-800 text-white"
                   }`}
                 >
                   Send Message
@@ -1326,7 +1451,11 @@ export default function Portfolio() {
       </section>
 
       {/* Apple-style Footer */}
-      <footer className={`py-16 transition-colors duration-300 ${isDarkMode ? "bg-gray-800" : "bg-gray-50"}`}>
+      <footer
+        className={`py-16 transition-colors duration-300 ${
+          isDarkMode ? "bg-gray-800" : "bg-gray-50"
+        }`}
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center space-y-8">
             <div
@@ -1341,12 +1470,16 @@ export default function Portfolio() {
                 isDarkMode ? "text-gray-300" : "text-gray-600"
               }`}
             >
-              Software Engineer • Building scalable systems that drive innovation across Africa
+              Software Engineer • Building scalable systems that drive
+              innovation across Africa
             </p>
             <div className="flex justify-center space-x-6">
               {[
                 { icon: Github, url: "https://github.com/danlewismuriuki" },
-                { icon: Linkedin, url: "https://linkedin.com/in/danlewismuriuki" },
+                {
+                  icon: Linkedin,
+                  url: "https://linkedin.com/in/danlewismuriuki",
+                },
                 { icon: Mail, url: "mailto:danlewismuriuki2@gmail.com" },
               ].map((social, index) => (
                 <a
@@ -1372,12 +1505,13 @@ export default function Portfolio() {
                   isDarkMode ? "text-gray-400" : "text-gray-500"
                 }`}
               >
-                © {new Date().getFullYear()} Dan Lewis Muriuki. All rights reserved.
+                © {new Date().getFullYear()} Dan Lewis Muriuki. All rights
+                reserved.
               </p>
             </div>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
