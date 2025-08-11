@@ -115,7 +115,7 @@ export default function Portfolio() {
         "Quasar FrameWork",
         "Docker",
       ],
-      image: "/datacenter.png?height=240&width=400",
+      image: "/datacenter3.png?height=240&width=400",
       github: "https://github.com/danlewismuriuki",
       live: "https://intuitive-planner.vercel.app/",
     },
@@ -133,8 +133,7 @@ export default function Portfolio() {
       description:
         "Platform connecting Kenyan parents to exchange, buy, or donate school books. Save money while building stronger communities through book sharing, smart matching, and safe transactions.",
       tech: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "M-Pesa API"],
-      // image: "/vitabuvitabu.png?height=240&width=400",
-      image: "/vitabuvitabu.png",
+      image: "/vitabuvitabu3.png",
       github: "https://github.com/danlewismuriuki",
       live: "https://vitabuvitabu.app/",
     },
@@ -143,7 +142,7 @@ export default function Portfolio() {
       description:
         "An AI-powered business management ecosystem that transforms operations with quantum analytics, AI scheduling, financial automation, and enterprise-grade security — boosting productivity, cutting costs, and driving growth.",
       tech: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "AI/ML"],
-      image: "/bizpro.png?height=240&width=400",
+      image: "/bizpro3.png?height=240&width=400",
       github: "https://github.com/danlewismuriuki",
       live: "https://bizmaster.co.ke",
     },
