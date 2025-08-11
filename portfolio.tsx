@@ -115,7 +115,7 @@ export default function Portfolio() {
         "Quasar FrameWork",
         "Docker",
       ],
-      image: "/datacenter3.png?height=240&width=400",
+      image: "/datacenter4.png?height=240&width=400",
       github: "https://github.com/danlewismuriuki",
       live: "https://intuitive-planner.vercel.app/",
     },
